@@ -9,7 +9,6 @@ import * as styles from "../components/index.module.css"
 const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
 
 export default ({ data }) => {
-  console.log(data);
   return (
     <Layout>
     <div>
@@ -38,7 +37,7 @@ export const Head = () => <Seo title="Home" />
 
 export const query = graphql`
   query {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
       totalCount
       edges {
         node {
@@ -48,6 +47,9 @@ export const query = graphql`
             date
             description
             title
+          }
+          fields {
+            slug
           }
         }
       }
